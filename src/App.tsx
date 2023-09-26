@@ -1,9 +1,7 @@
+import { Landing } from './pages/landing';
+
 function App() {
-	return (
-		<div className="min-h-screen flex justify-center items-center">
-			<h1 className="text-3xl font-bold text-blue-600">Hello Prom AI</h1>
-		</div>
-	);
+	return <Landing />;
 }
 
 export default App;
