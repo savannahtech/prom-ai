@@ -167,7 +167,7 @@ export const RightCarouselIcon = ({ stroke = '#283593', opacity = '0.5', ...rest
 			{...restProps}
 		>
 			<g opacity="inherit">
-				<path d="M6 12L10 8L6 4" stroke="inherit" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+				<path d="M6 12L10 8L6 4" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 			</g>
 		</svg>
 	);
@@ -186,7 +186,7 @@ export const LeftCarouselIcon = ({ stroke = '#283593', opacity = '0.5', ...restP
 			{...restProps}
 		>
 			<g opacity="inherit">
-				<path d="M10 4L6 8L10 12" stroke="inherit" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+				<path d="M10 4L6 8L10 12" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 			</g>
 		</svg>
 	);
