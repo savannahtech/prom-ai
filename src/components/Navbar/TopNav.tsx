@@ -7,7 +7,7 @@ export const TopNav = () => {
 						<div className="flex flex-row items-center justify-between">
 							<img className="h-[33px] object-cover" src="images/img_asset142x1.png" alt="asset142xOne" />
 
-							<div className="border-b-2 border-[#283593] ml-24">
+							<div className="border-b-2 border-primary ml-24">
 								<img className="h-8 w-8 mb-1" src="images/img_home.svg" alt="home" />
 							</div>
 						</div>
