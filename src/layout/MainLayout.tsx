@@ -8,7 +8,7 @@ interface MainLayoutProps {
 export const MainLayout = ({ children }: MainLayoutProps) => {
 	return (
 		<div className="h-screen overflow-hidden">
-			{/* <Navbar /> */}
+			<Navbar />
 			{/* main layout */}
 			<div className="flex flex-1 h-full">
 				<aside className="w-1/4">
