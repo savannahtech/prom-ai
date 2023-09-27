@@ -26,7 +26,7 @@ export const SubNav = () => {
     ]
 
     return (
-        <div className="px-5 py-3 relative w-full border-b border-bd-color">
+        <div className="px-5 py-3 relative w-full border-b border-blue_gray-100">
             <div className="w-full flex flex-col md:flex-row items-center">
                 <div className="w-1/4">
                     <Text
