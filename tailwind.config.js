@@ -6,7 +6,8 @@ export default {
 			colors: {
 				mainBg: '#ECEFF1',
 				'white-A700': '#ffffff',
-				'bd-color': '#D4D4D4',
+				'blue_gray-50': '#eceff1',
+				'blue_gray-100': '#D4D4D4',
 			},
 		},
 	},
