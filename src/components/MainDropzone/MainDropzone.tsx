@@ -20,7 +20,9 @@ export const MainDropzone = () => {
 				<div className="bg-white-A700 flex flex-col items-center justify-center rounded shadow-bs w-[210px] border border-blue_gray-100">
 					<div
 						className="bg-cover bg-no-repeat flex flex-col h-auto md:h-[210px] w-[210px] items-center justify-center rounded"
-						style={{ backgroundImage: "url('images/img_frame592.svg')" }}
+						style={{
+							backgroundImage: appState.columns['dropzone']?.taskIds.length > 0 ? '' : "url('images/img_frame592.svg')",
+						}}
 					>
 						<Droppable droppableId={'dropzone'}>
 							{(provided, snapshot) => {
@@ -69,7 +71,7 @@ export const MainDropzone = () => {
 																draggableId={el.id}
 																index={index}
 																className="mt-3 flex flex-row hover:bg-slate-100"
-																isDragDisabled={true}
+																isDragDisabled={false}
 																onClick={() => {}}
 															>
 																{el.icon}

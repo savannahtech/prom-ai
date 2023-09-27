@@ -63,9 +63,9 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 
 				<Droppable droppableId={'left'}>
 					{(provided, snapshot) => {
+						console.log({ snapshot });
 						return (
 							<div
-								// className={snapshot.isDraggingOver ? 'bg-mainBg border h-20 p-1 rounded-lg' : ''}
 								ref={provided.innerRef}
 								{...provided.droppableProps}
 								className={snapshot.isDraggingOver ? 'bg-mainBg border p-1 rounded-lg' : ''}
@@ -115,9 +115,10 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 												</div>
 											);
 										default:
-											return null;
+											return <div className={snapshot.isDraggingOver ? 'bg-mainBg border p-1 rounded-lg' : ''} />;
 									}
 								})}
+								{!appState.columns['left']?.taskIds.length && <div className={'bg-mainBg p-1 rounded-lg h-20'} />}
 								{provided.placeholder}
 							</div>
 						);
