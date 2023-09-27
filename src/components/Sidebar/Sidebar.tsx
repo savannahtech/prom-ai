@@ -10,11 +10,12 @@ import {
 	WorkshopIcon,
 } from '../../assets/svg';
 import DragItem from '../DragItem';
+import { Carousel } from './Carousel';
 
 export const Sidebar = () => {
 	return (
 		<div className="bg-white h-full overflow-y-auto">
-			<div className="flex flex-col gap-2 p-4">
+			<div className="flex flex-col gap-4 p-4">
 				<div className="flex sm:flex-row flex-col gap-2 items-start justify-start">
 					<Text className="border border-solid p-1 text-xs" size="txtLatoRegular14Gray900">
 						MAZOR_Surgical Arm
@@ -30,6 +31,8 @@ export const Sidebar = () => {
 						Line 1
 					</Text>
 				</div>
+
+				<Carousel />
 
 				<div className="flex flex-row border border-solid mt-2 cursor-pointer">
 					<input placeholder="Input Search text" type="text" className="p-0.5 w-full pl-2" />
