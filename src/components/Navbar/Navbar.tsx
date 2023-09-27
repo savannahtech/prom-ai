@@ -1,3 +1,9 @@
+import { SubNav } from "./SubNav";
+import { TopNav } from "./TopNav";
+
 export const Navbar = () => {
-	return <div className="h-40">Navbar</div>;
+	return <div>
+		<TopNav />
+		<SubNav />
+	</div>;
 };

@@ -5,6 +5,8 @@ export default {
 		extend: {
 			colors: {
 				mainBg: '#ECEFF1',
+				'white-A700': '#ffffff',
+				'bd-color': '#D4D4D4',
 			},
 		},
 	},
