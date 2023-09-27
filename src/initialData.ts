@@ -1,8 +1,7 @@
-import { StationIcon, StorageIcon, WorkshopIcon } from './assets/svg';
 export type TaskID = string;
 export type ColumnID = string;
 
-export type TaskType = "menu" | "announcement";
+export type TaskType = "left" | "dropzone";
 export interface TaskData {
     id: string;
     content: string;
@@ -27,9 +26,9 @@ export const getTask = (id: string): TaskData => {
     return {
         id: id,
         content:
-            type === "announcement"
-                ? "Take out the garbage"
-                : "Watch my favorite show",
+            type === "left"
+                ? "left"
+                : "dropzone",
         type: type as TaskType
     };
 };
@@ -44,13 +43,17 @@ export const initialData: ApplicationData = {
     columns: {
         "left": {
             id: "left",
-            title: "Uncategorized",
-            taskIds: []
+            title: "Left",
+            taskIds: [
+                "new-station",
+                "storage",
+                "workshop"
+            ]
         },
-        "right": {
-            id: "right",
-            title: "Stations",
-            taskIds: ["1/announcement"]
+        "dropzone": {
+            id: "dropzone",
+            title: "Dropzone",
+            taskIds: []
         },
     }
 };

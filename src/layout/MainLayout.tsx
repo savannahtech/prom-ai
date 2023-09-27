@@ -1,26 +1,22 @@
 import { useState } from 'react'
-// import { ReactNode } from 'react';
 import { BeforeCapture, DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { MainDropzone, Navbar, Sidebar } from '../components';
-import { ApplicationData, cloneTask, initialData } from '../initialData';
+import { MainDropzone, Navbar, Sidebar } from '../components'; // MainDropzone
 
-// interface MainLayoutProps {
-// 	children: ReactNode;
-// }
+import { ApplicationData, ColumnnData, cloneTask } from '../initialData';
+import { useUserContext } from '../context/AppContext';
 
-export const MainLayout = () => {
-	const [appState, setAppState] = useState<ApplicationData>(initialData);
+export const MainLayout = ({ children }: { children: React.ReactNode }) => {
+	const { appState, setItems } = useUserContext();
 	const [useDragHandle, setUseDragHandle] = useState<boolean>(false);
 
 	const onDragEnd = (result: DropResult) => {
-		console.log('results:', result);
+		console.log('results:', result, 'current App State:', appState);
 
 		const { destination, source, draggableId } = result;
 
 		if (!destination) {
 			if (
-				source.droppableId === "column-3" ||
-				source.droppableId === "column-4"
+				source.droppableId === "left"
 			) {
 				const final: ColumnnData = appState.columns[source.droppableId];
 				const newTaskIds = Array.from(final.taskIds);
@@ -36,7 +32,7 @@ export const MainLayout = () => {
 						[newColumn.id]: newColumn
 					}
 				};
-				setAppState(newState);
+				setItems(newState);
 			}
 			return;
 		}
@@ -48,96 +44,97 @@ export const MainLayout = () => {
 			return;
 		}
 
-		// const start: ColumnnData = appState.columns[source.droppableId];
-		// const finish: ColumnnData = appState.columns[destination.droppableId];
+		const start: ColumnnData = appState.columns[source.droppableId];
+		const finish: ColumnnData = appState.columns[destination.droppableId];
 
-		// if (start === finish) {
-		// 	const newTaskIds = Array.from(start.taskIds);
-		// 	// // remove the task
-		// 	newTaskIds.splice(source.index, 1);
-		// 	// insert the task to destination
-		// 	newTaskIds.splice(destination.index, 0, draggableId);
-		// 	const newColumn: ColumnnData = {
-		// 		...start,
-		// 		taskIds: newTaskIds
-		// 	};
+		if (start === finish) {
+			const newTaskIds = Array.from(start.taskIds);
+			// // remove the task
+			newTaskIds.splice(source.index, 1);
+			// insert the task to destination
+			newTaskIds.splice(destination.index, 0, draggableId);
+			const newColumn: ColumnnData = {
+				...start,
+				taskIds: newTaskIds
+			};
 
-		// 	const newState: ApplicationData = {
-		// 		...appState,
-		// 		columns: {
-		// 			...appState.columns,
-		// 			[newColumn.id]: newColumn
-		// 		}
-		// 	};
-		// 	setAppState(newState);
-		// } else {
-		// 	const startTaskIds = Array.from(start.taskIds);
-		// 	startTaskIds.splice(source.index, 1);
-		// 	const newStart: ColumnnData = {
-		// 		...start,
-		// 		taskIds: startTaskIds
-		// 	};
+			const newState: ApplicationData = {
+				...appState,
+				columns: {
+					...appState.columns,
+					[newColumn.id]: newColumn
+				}
+			};
+			setItems(newState);
+		} else {
+			const startTaskIds = Array.from(start.taskIds);
+			startTaskIds.splice(source.index, 1);
+			const newStart: ColumnnData = {
+				...start,
+				taskIds: startTaskIds
+			};
 
-		// 	const finishTaskIds = Array.from(finish.taskIds);
-		// 	const newTaskId = [draggableId, "dropped"].join("/");
-		// 	finishTaskIds.splice(destination.index, 0, newTaskId);
-		// 	const newFinish: ColumnnData = {
-		// 		...finish,
-		// 		taskIds: finishTaskIds
-		// 	};
+			const finishTaskIds = Array.from(finish.taskIds);
+			const newTaskId = [draggableId, "dropped"].join("/");
+			finishTaskIds.splice(destination.index, 0, newTaskId);
+			const newFinish: ColumnnData = {
+				...finish,
+				taskIds: finishTaskIds
+			};
 
-		// 	const newState: ApplicationData = {
-		// 		...appState,
-		// 		columns: {
-		// 			...appState.columns,
-		// 			[newStart.id]: newStart,
-		// 			[newFinish.id]: newFinish
-		// 		}
-		// 	};
-		// 	setAppState(newState);
-		// }
+			const newState: ApplicationData = {
+				...appState,
+				columns: {
+					...appState.columns,
+					[newStart.id]: newStart,
+					[newFinish.id]: newFinish
+				}
+			};
+			setItems(newState);
+		}
 	};
 
 	const onBeforeCapture = (before: BeforeCapture) => {
-		console.log('before.draggableId:', before.draggableId)
-		// if (before.draggableId.split("/")[2] === "dropped") {
-		// 	return;
-		// }
+		console.log('before.draggableId:', before)
 
-		// const clonedTask = cloneTask(before.draggableId);
+		if (before.draggableId.split("/")[2] === "dropped") {
+			return;
+		}
 
-		// if (clonedTask.type === "announcement") {
-		// 	const tasks = Array.from(appState.columns["column-3"].taskIds);
-		// 	tasks.push(clonedTask.id);
+		const clonedTask = cloneTask(before.draggableId);
 
-		// 	const newState: ApplicationData = {
-		// 		...appState,
-		// 		columns: {
-		// 			...appState.columns,
-		// 			"column-3": {
-		// 				id: "column-3",
-		// 				title: "announcement actions",
-		// 				taskIds: tasks
-		// 			}
-		// 		}
-		// 	};
-		// 	setAppState(newState);
-		// } else {
-		// 	const tasks = Array.from(appState.columns["column-4"].taskIds);
-		// 	tasks.push(clonedTask.id);
-		// 	const newState: ApplicationData = {
-		// 		...appState,
-		// 		columns: {
-		// 			...appState.columns,
-		// 			"column-4": {
-		// 				id: "column-4",
-		// 				title: "Menu Actions",
-		// 				taskIds: tasks
-		// 			}
-		// 		}
-		// 	};
-		// 	setAppState(newState);
-		// }
+		if ([clonedTask.type, clonedTask.id].includes("left")) {
+			const tasks = Array.from(appState.columns["left"].taskIds);
+			tasks.push(clonedTask.id);
+
+			const newState: ApplicationData = {
+				...appState,
+				columns: {
+					...appState.columns,
+					"left": {
+						id: "left",
+						title: "Left",
+						taskIds: tasks
+					}
+				}
+			};
+			setItems(newState);
+		} else {
+			const tasks = Array.from(appState.columns["dropzone"].taskIds);
+			tasks.push(clonedTask.id);
+			const newState: ApplicationData = {
+				...appState,
+				columns: {
+					...appState.columns,
+					"dropzone": {
+						id: "dropzone",
+						title: "Dropzone",
+						taskIds: tasks
+					}
+				}
+			};
+			setItems(newState);
+		}
 	};
 
 	const handleOnClick = () => {
@@ -153,7 +150,8 @@ export const MainLayout = () => {
 						<Sidebar useDragHandle={useDragHandle} onItemClick={handleOnClick} />
 					</aside>
 					<main className="w-3/4 bg-mainBg p-4 overflow-y-auto">
-						<MainDropzone />
+						{children}
+						{/* <MainDropzone useDragHandle={useDragHandle} onItemClick={handleOnClick} /> */}
 					</main>
 				</DragDropContext>
 			</div>

@@ -2,6 +2,8 @@ export * from './MainDropzone';
 export * from './Navbar';
 export * from './Sidebar';
 export * from './EntityOverview';
+export * from './Column';
+export * from './Task';
 export { Img } from "./Img";
 export { Line } from "./Line";
 export { Button } from "./Button";

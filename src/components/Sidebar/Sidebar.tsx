@@ -12,6 +12,7 @@ import {
 } from '../../assets/svg';
 import DragItem from '../DragItem';
 import { Carousel } from './Carousel';
+import { useUserContext } from '../../context/AppContext';
 
 interface SidebarProps {
 	useDragHandle: boolean
@@ -19,23 +20,7 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ useDragHandle, onItemClick }: SidebarProps) => {
-	const initialItems = [
-		{
-			id: "new-station",
-			name: "New Station",
-			icon: <StationIcon />
-		},
-		{
-			id: "storage",
-			name: "Storage",
-			icon: <StorageIcon />
-		},
-		{
-			id: "workshop",
-			name: "Workshop",
-			icon: <WorkshopIcon />
-		},
-	]
+	const { appState } = useUserContext();
 
 	return (
 		<div className="bg-white h-full overflow-y-auto">
@@ -78,7 +63,7 @@ export const Sidebar = ({ useDragHandle, onItemClick }: SidebarProps) => {
 
 
 				<Droppable
-					droppableId="left"
+					droppableId={appState.columns["left"].id}
 					isDropDisabled={true}
 					type="left"
 				>
@@ -91,19 +76,44 @@ export const Sidebar = ({ useDragHandle, onItemClick }: SidebarProps) => {
 								ref={provided.innerRef}
 								{...provided.droppableProps}
 							>
-								{initialItems.map((el, index) => (
-									<DragItem
-										key={index}
-										draggableId={el.id}
-										index={index}
-										className="mt-3 flex flex-row hover:bg-slate-100"
-										useDragHandle={useDragHandle}
-										onClick={onItemClick}
-									>
-										{el.icon}
-										<Text className="ml-1">{el.name}</Text>
-									</DragItem>
-								))}
+								{appState.columns["left"]?.taskIds.map((_el) => {
+									switch (_el) {
+										case 'new-station':
+											return {
+												id: "new-station",
+												name: "New Station",
+												icon: <StationIcon />
+											}
+										case 'storage':
+											return {
+												id: "storage",
+												name: "Storage",
+												icon: <StorageIcon />
+											}
+										case 'workshop':
+											return {
+												id: "workshop",
+												name: "Workshop",
+												icon: <WorkshopIcon />
+											}
+
+										default:
+											break;
+									}
+								})
+									.map((el, index) => (
+										<DragItem
+											key={index}
+											draggableId={el.id}
+											index={index}
+											className="mt-3 flex flex-row hover:bg-slate-100"
+											useDragHandle={useDragHandle}
+											onClick={onItemClick}
+										>
+											{el.icon}
+											<Text className="ml-1">{el.name}</Text>
+										</DragItem>
+									))}
 								{provided.placeholder}
 							</div>
 						);

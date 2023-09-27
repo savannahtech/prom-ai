@@ -16,7 +16,7 @@ const DragItem: React.FC<React.PropsWithChildren<DragItemProps>> = ({ children, 
 		<Draggable draggableId={draggableId || ''} index={index || 0}>
 			{(provided, snapshot) => (
 				<div
-					className={snapshot.isDragging ? "TaskDragging" : "Task"}
+					className={snapshot.isDragging ? "TaskDragging" : "Task w-full"}
 					{...provided.draggableProps}
 					{...(useDragHandle ? {} : provided.dragHandleProps)}
 					ref={provided.innerRef}

@@ -1,7 +1,12 @@
+import { UserContextProvider } from './context/AppContext';
 import { Landing } from './pages/landing';
 
 function App() {
-	return <Landing />;
+	return (
+		<UserContextProvider>
+			<Landing />
+		</UserContextProvider>
+	)
 }
 
 export default App;
