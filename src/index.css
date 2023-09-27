@@ -16,3 +16,7 @@
 		}
 	}
 }
+
+.dropped .Task {
+	width: 92% !important;
+}

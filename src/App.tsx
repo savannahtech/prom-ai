@@ -6,7 +6,7 @@ function App() {
 		<UserContextProvider>
 			<Landing />
 		</UserContextProvider>
-	)
+	);
 }
 
 export default App;

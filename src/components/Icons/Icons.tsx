@@ -1,4 +1,3 @@
-const Icons = {
-}
+const Icons = {};
 
-export default Icons
+export default Icons;
