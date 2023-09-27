@@ -1,19 +1,43 @@
+import { Draggable } from 'react-beautiful-dnd';
+
 export type DragItemProps = Partial<{
 	className: string;
 	as: React.ElementType;
+	index: number;
+	draggableId: string;
+	useDragHandle: boolean;
 }> &
 	React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;
 
-const DragItem: React.FC<React.PropsWithChildren<DragItemProps>> = ({ children, className = '', as, ...restProps }) => {
+const DragItem: React.FC<React.PropsWithChildren<DragItemProps>> = ({
+	children,
+	className = '',
+	as,
+	draggableId,
+	index,
+	useDragHandle,
+	...restProps
+}) => {
 	const Component = as || 'div';
 
 	return (
-		<Component
-			className={`border border-primary border-solid rounded-lg p-6 cursor-pointer ${className}`}
-			{...restProps}
-		>
-			{children}
-		</Component>
+		<Draggable draggableId={draggableId || ''} index={index || 0}>
+			{(provided, snapshot) => (
+				<div
+					className={snapshot.isDragging ? 'TaskDragging' : 'Task w-full'}
+					{...provided.draggableProps}
+					{...(useDragHandle ? {} : provided.dragHandleProps)}
+					ref={provided.innerRef}
+				>
+					<Component
+						className={`border border-primary border-solid rounded p-3 cursor-pointer ${className}`}
+						{...restProps}
+					>
+						{children}
+					</Component>
+				</div>
+			)}
+		</Draggable>
 	);
 };
 
