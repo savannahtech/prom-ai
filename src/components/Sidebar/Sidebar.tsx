@@ -15,11 +15,11 @@ import { Carousel } from './Carousel';
 import { useUserContext } from '../../context/AppContext';
 
 interface SidebarProps {
-	useDragHandle: boolean;
+	useDragHandle?: boolean;
 	onItemClick: () => void;
 }
 
-export const Sidebar = ({ useDragHandle, onItemClick }: SidebarProps) => {
+export const Sidebar = ({ onItemClick }: SidebarProps) => {
 	const { appState } = useUserContext();
 
 	return (
@@ -44,8 +44,8 @@ export const Sidebar = ({ useDragHandle, onItemClick }: SidebarProps) => {
 				<Carousel />
 
 				<div className="flex flex-row border border-solid border-primary  mt-2 cursor-pointer rounded-r-sm rounded-l-sm">
-					<input placeholder="Input Search text" type="text" className="py-1 w-full px-4" />
-					<div className="flex justify-center items-center py-0.5 px-1 border-primary border-l">
+					<input placeholder="input search text" type="text" className="py-1 w-full px-4" />
+					<div className="flex justify-center items-center py-0.5 px-1 border-primary border-l outline-none">
 						<SearchIcon />
 					</div>
 				</div>
@@ -61,53 +61,63 @@ export const Sidebar = ({ useDragHandle, onItemClick }: SidebarProps) => {
 					</div>
 				</div>
 
-				<Droppable droppableId={appState.columns['left'].id} isDropDisabled={true} type="left">
+				<Droppable droppableId={'left'}>
 					{(provided, snapshot) => {
 						return (
 							<div
-								className={snapshot.isDraggingOver ? 'TaskListDragging' : 'TaskList'}
+								// className={snapshot.isDraggingOver ? 'bg-mainBg border h-20 p-1 rounded-lg' : ''}
 								ref={provided.innerRef}
 								{...provided.droppableProps}
+								className={snapshot.isDraggingOver ? 'bg-mainBg border p-1 rounded-lg' : ''}
 							>
-								{appState.columns['left']?.taskIds
-									.map((_el) => {
-										switch (_el) {
-											case 'new-station':
-												return {
-													id: 'new-station',
-													name: 'New Station',
-													icon: <StationIcon />,
-												};
-											case 'storage':
-												return {
-													id: 'storage',
-													name: 'Storage',
-													icon: <StorageIcon />,
-												};
-											case 'workshop':
-												return {
-													id: 'workshop',
-													name: 'Workshop',
-													icon: <WorkshopIcon />,
-												};
-
-											default:
-												break;
-										}
-									})
-									.map((el, index) => (
-										<DragItem
-											key={index}
-											draggableId={el?.id}
-											index={index}
-											className="mt-3 flex flex-row hover:bg-slate-100"
-											useDragHandle={useDragHandle}
-											onClick={onItemClick}
-										>
-											{el?.icon}
-											<Text className="ml-1">{el?.name}</Text>
-										</DragItem>
-									))}
+								{appState.columns['left']?.taskIds.map((_el, index) => {
+									switch (_el) {
+										case 'new-station':
+											return (
+												<div key={_el} className={snapshot.isDraggingOver ? 'bg-mainBg border p-1 rounded-lg' : ''}>
+													<DragItem
+														draggableId={'new-station'}
+														index={index}
+														className="mt-3 flex flex-row hover:bg-slate-100"
+														onClick={onItemClick}
+													>
+														<StationIcon />
+														<Text className="ml-1">New Station</Text>
+													</DragItem>
+												</div>
+											);
+										case 'storage':
+											return (
+												<div key={_el} className={snapshot.isDraggingOver ? 'bg-mainBg border p-1 rounded-lg' : ''}>
+													<DragItem
+														draggableId={'storage'}
+														index={index}
+														className="mt-3 flex flex-row hover:bg-slate-100"
+														onClick={onItemClick}
+													>
+														<StorageIcon />
+														<Text className="ml-1">Storage</Text>
+													</DragItem>
+												</div>
+											);
+										case 'workshop':
+											return (
+												<div key={_el} className={snapshot.isDraggingOver ? 'bg-mainBg border p-1 rounded-lg' : ''}>
+													<DragItem
+														draggableId={'workshop'}
+														index={index}
+														className="mt-3 flex flex-row hover:bg-slate-100"
+														onClick={onItemClick}
+													>
+														<WorkshopIcon />
+														<Text className="ml-1">Workshop</Text>
+													</DragItem>
+												</div>
+											);
+										default:
+											return null;
+									}
+								})}
 								{provided.placeholder}
 							</div>
 						);

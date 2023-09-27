@@ -10,8 +10,11 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
 	const [useDragHandle, setUseDragHandle] = useState<boolean>(false);
 
 	const onDragEnd = (result: DropResult) => {
-		const { source, draggableId } = result;
-		// if (!destination) return;
+		const { source, draggableId, destination } = result;
+
+		if (!destination || destination.droppableId === source.droppableId) return;
+
+		console.log(destination, result);
 
 		const final = appState.columns[source.droppableId].taskIds;
 		const filteredSource = final.filter((el) => el !== draggableId);
@@ -34,6 +37,8 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
 				},
 			},
 		};
+
+		console.log({ newState });
 
 		setItems(newState);
 	};
