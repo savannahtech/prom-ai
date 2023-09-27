@@ -8,7 +8,7 @@ const DragItem: React.FC<React.PropsWithChildren<DragItemProps>> = ({ children, 
 	const Component = as || 'div';
 
 	return (
-		<Component className={`border border-blue-400 border-solid rounded p-3 cursor-pointer ${className}`} {...restProps}>
+		<Component className={`border border-primary border-solid rounded p-3 cursor-pointer ${className}`} {...restProps}>
 			{children}
 		</Component>
 	);

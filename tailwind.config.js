@@ -8,6 +8,7 @@ export default {
 				'white-A700': '#ffffff',
 				'blue_gray-50': '#eceff1',
 				'blue_gray-100': '#D4D4D4',
+				primary: '#283593',
 			},
 		},
 	},
