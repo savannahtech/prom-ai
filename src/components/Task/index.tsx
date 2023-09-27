@@ -14,7 +14,7 @@ export const Task = ({ task, index, useDragHandle }: TaskProps) => {
 				<div
 					className={snapshot.isDragging ? 'TaskDragging' : 'Task'}
 					{...provided.draggableProps}
-					{...(useDragHandle ? {} : provided.dragHandleProps)}
+					{...provided.dragHandleProps}
 					ref={provided.innerRef}
 				>
 					{useDragHandle ? <div className="Handle" {...provided.dragHandleProps} /> : null}
