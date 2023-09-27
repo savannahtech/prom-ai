@@ -22,8 +22,8 @@ export const Carousel = () => {
 	const carouselItems = ['floors', 'Lines', 'Stations', 'parts', 'MoreItem1'];
 
 	return (
-		<div className="flex">
-			<button className="p-1" onClick={() => slide(-SCROLL_AMOUNT)}>
+		<div className="flex w-full">
+			<button className="py-1 px-0 mr-3" onClick={() => slide(-SCROLL_AMOUNT)}>
 				<LeftCarouselIcon className="hover:stroke-primary hover:opacity-100" />
 			</button>
 			<div className="flex bg-white overflow-auto no-scrollbar w-full" ref={scrollingDivRef}>
@@ -38,7 +38,7 @@ export const Carousel = () => {
 					</span>
 				))}
 			</div>
-			<button className="p-1" onClick={() => slide(+SCROLL_AMOUNT)}>
+			<button className="py-1 px-0 ml-3" onClick={() => slide(+SCROLL_AMOUNT)}>
 				<RightCarouselIcon className="hover:stroke-primary hover:opacity-100" />
 			</button>
 		</div>

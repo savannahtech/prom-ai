@@ -17,14 +17,14 @@ export const Sidebar = () => {
 		<div className="bg-white h-full overflow-y-auto">
 			<div className="flex flex-col gap-4 p-4">
 				<div className="flex sm:flex-row flex-col gap-2 items-start justify-start">
-					<Text className="border border-solid p-1 text-xs" size="txtLatoRegular14Gray900">
+					<Text className="border border-[#546E7A] rounded-sm border-solid p-1 text-sm" size="txtLatoRegular14Gray900">
 						MAZOR_Surgical Arm
 					</Text>
-					<Text className="border border-solid p-1 text-xs" size="txtLatoRegular14Gray900">
+					<Text className="border border-[#546E7A]  rounded-sm border-solid p-1 text-sm" size="txtLatoRegular14Gray900">
 						Floor 1
 					</Text>
 					<Text
-						className="bg-pink-300 justify-center p-1 rounded-sm text-base text-white text-xs"
+						className="bg-pink-300 justify-center p-1 rounded-sm text-white text-sm"
 						size="txtLatoRegular16"
 						style={{ backgroundColor: '#F06292' }}
 					>
@@ -34,9 +34,9 @@ export const Sidebar = () => {
 
 				<Carousel />
 
-				<div className="flex flex-row border border-solid mt-2 cursor-pointer">
-					<input placeholder="Input Search text" type="text" className="p-0.5 w-full pl-2" />
-					<div className="flex justify-center items-center py-0.5 px-1 border border-left">
+				<div className="flex flex-row border border-solid border-primary  mt-2 cursor-pointer rounded-r-sm rounded-l-sm">
+					<input placeholder="Input Search text" type="text" className="py-1 w-full px-4" />
+					<div className="flex justify-center items-center py-0.5 px-1 border-primary border-l">
 						<SearchIcon />
 					</div>
 				</div>
