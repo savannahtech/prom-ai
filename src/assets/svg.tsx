@@ -147,7 +147,7 @@ export const StationIcon = () => {
 				strokeLinejoin="round"
 			/>
 			<path d="M4 9H9.71429V7" stroke="#607D8B" strokeWidth="1.81824" strokeLinecap="round" strokeLinejoin="round" />
-			<path d="M20 9H14.2857V7" stroke="#607D8B" stroke-width="1.81824" strokeLinecap="round" strokeLinejoin="round" />
+			<path d="M20 9H14.2857V7" stroke="#607D8B" strokeWidth="1.81824" strokeLinecap="round" strokeLinejoin="round" />
 		</svg>
 	);
 };

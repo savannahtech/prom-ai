@@ -1,3 +1,4 @@
+import { Text } from '..';
 import {
 	GridIcon,
 	LetterIcon,
@@ -9,7 +10,6 @@ import {
 	WorkshopIcon,
 } from '../../assets/svg';
 import DragItem from '../DragItem';
-import Text from '../Text';
 
 export const Sidebar = () => {
 	return (
