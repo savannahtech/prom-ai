@@ -8,10 +8,10 @@ type EntityProps = {
 
 export const EntityOverview = (props: EntityProps) => {
 	return (
-		<div>
+		<div className="flex flex-col justify-start">
 			<div className="flex flex-row items-start">
 				<Img
-					className="h-4 w-4"
+					className="h-4 w-4 -ml-[4px]"
 					src={props.src} // images/img_trash.svg
 					alt="trash"
 				/>

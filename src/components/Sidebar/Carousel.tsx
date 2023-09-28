@@ -1,10 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { LeftCarouselIcon, RightCarouselIcon } from '../../assets/svg';
 
 const SCROLL_AMOUNT = 50;
 
 export const Carousel = () => {
 	const scrollingDivRef = useRef<HTMLDivElement | null>(null);
+	const [activeCarouselItem, setActiveCarouselItem] = useState('Stations');
 
 	// scroll horizontally with the arrow is pressed
 	const slide = (shift: number) => {
@@ -29,9 +30,11 @@ export const Carousel = () => {
 			<div className="flex bg-white overflow-auto no-scrollbar w-full" ref={scrollingDivRef}>
 				{carouselItems.map((item, index) => (
 					<span
+						onClick={() => setActiveCarouselItem(item)}
 						key={`${item}-${index}`}
-						className={`py-1 px-4 border border-primary text-sm uppercase ${index % 2 === 1 ? 'border-r-0 border-l-0' : ''
-							} ${item === 'Stations' ? 'font-bold bg-primary text-white' : 'font-light '}`} // imitating selected
+						className={`py-1 px-4 border border-primary text-sm uppercase cursor-pointer ${
+							index % 2 === 1 ? 'border-r-0 border-l-0' : ''
+						} ${item === activeCarouselItem ? 'font-bold bg-primary text-white' : 'font-light '}`}
 					>
 						{item}
 					</span>
