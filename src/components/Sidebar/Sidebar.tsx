@@ -14,7 +14,6 @@ import DragItem from '../DragItem';
 import { Slider } from './Carousel';
 import { useUserContext } from '../../context/AppContext';
 import { ApplicationData, ColumnnData } from '../../initialData';
-import { useState } from 'react';
 
 interface SidebarProps {
 	useDragHandle?: boolean;
@@ -23,8 +22,6 @@ interface SidebarProps {
 
 export const Sidebar = ({ onItemClick }: SidebarProps) => {
 	const { appState, setItems } = useUserContext();
-	const [inputValue, setInputValue] = useState<string>('');
-	// const [filterList, setfilterList] = useState<string[]>(appState.columns['left'].taskIds);
 
 	const sortList = (type: string) => {
 		const taskList = [...appState.columns['left'].taskIds];
@@ -49,19 +46,6 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 		setItems(newState);
 	};
 
-	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setInputValue(event.target.value);
-	};
-
-	const hanleSearch = () => {
-		// if (inputValue) {
-		// 	const taskList = [...appState.columns['left'].taskIds]
-		// 	const searchList = taskList.filter((el => el.toLowerCase().includes(inputValue.toLowerCase())));
-		// 	setfilterList(searchList)
-		// 	return;
-		// } else setfilterList(appState.columns['left'].taskIds)
-	};
-
 	return (
 		<div className="bg-white h-full overflow-y-auto">
 			<div className="flex flex-col gap-4 p-4">
@@ -84,15 +68,9 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 				<Slider />
 
 				<div className="flex flex-row border border-solid border-primary  mt-2 cursor-pointer rounded-r-sm rounded-l-sm">
-					<input
-						placeholder="input search text"
-						type="text"
-						className="py-1 w-full px-4"
-						value={inputValue}
-						onChange={handleInputChange}
-					/>
+					<input placeholder="input search text" type="text" className="py-1 w-full px-4" />
 					<div className="flex justify-center items-center py-0.5 px-1 border-primary border-l outline-none">
-						<Button title="search" className="p-0" onClick={hanleSearch}>
+						<Button title="search" className="p-0">
 							<SearchIcon />
 						</Button>
 					</div>
@@ -133,7 +111,6 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 
 				<Droppable droppableId={'left'}>
 					{(provided, snapshot) => {
-						console.log({ snapshot });
 						return (
 							<div
 								ref={provided.innerRef}

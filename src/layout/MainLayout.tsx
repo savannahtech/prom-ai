@@ -14,8 +14,6 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
 
 		if (!destination || destination.droppableId === source.droppableId) return;
 
-		console.log(destination, result);
-
 		const final = appState.columns[source.droppableId].taskIds;
 		const filteredSource = final.filter((el) => el !== draggableId);
 
@@ -37,8 +35,6 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
 				},
 			},
 		};
-
-		console.log({ newState });
 
 		setItems(newState);
 	};
