@@ -13,6 +13,8 @@ import {
 import DragItem from '../DragItem';
 import { Carousel } from './Carousel';
 import { useUserContext } from '../../context/AppContext';
+import CustomCarousel from '../Carousel';
+import PureSlider from '../Carousel/index2';
 
 interface SidebarProps {
 	useDragHandle?: boolean;
@@ -41,7 +43,9 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 					</Text>
 				</div>
 
-				<Carousel />
+				{/* <Carousel /> */}
+				<CustomCarousel />
+				{/* <PureSlider /> */}
 
 				<div className="flex flex-row border border-solid border-primary  mt-2 cursor-pointer rounded-r-sm rounded-l-sm">
 					<input placeholder="input search text" type="text" className="py-1 w-full px-4" />
