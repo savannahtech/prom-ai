@@ -23,22 +23,21 @@ export const Carousel = () => {
 
 	return (
 		<div className="flex w-full">
-			<button className="py-1 px-0 mr-3" onClick={() => slide(-SCROLL_AMOUNT)}>
+			<button className="py-1 px-0 mr-3 hover:bg-gray-200 flex-1 w-6 h-8" onClick={() => slide(-SCROLL_AMOUNT)}>
 				<LeftCarouselIcon className="hover:stroke-primary hover:opacity-100" />
 			</button>
 			<div className="flex bg-white overflow-auto no-scrollbar w-full" ref={scrollingDivRef}>
 				{carouselItems.map((item, index) => (
 					<span
 						key={`${item}-${index}`}
-						className={`py-1 px-4 border border-primary text-sm uppercase ${
-							index % 2 === 1 ? 'border-r-0 border-l-0' : ''
-						} ${item === 'Stations' ? 'font-bold bg-primary text-white' : 'font-light '}`} // imitating selected
+						className={`py-1 px-4 border border-primary text-sm uppercase ${index % 2 === 1 ? 'border-r-0 border-l-0' : ''
+							} ${item === 'Stations' ? 'font-bold bg-primary text-white' : 'font-light '}`} // imitating selected
 					>
 						{item}
 					</span>
 				))}
 			</div>
-			<button className="py-1 px-0 ml-3" onClick={() => slide(+SCROLL_AMOUNT)}>
+			<button className="py-1 px-0 ml-3 hover:bg-gray-200 flex-1 w-6 h-8" onClick={() => slide(+SCROLL_AMOUNT)}>
 				<RightCarouselIcon className="hover:stroke-primary hover:opacity-100" />
 			</button>
 		</div>

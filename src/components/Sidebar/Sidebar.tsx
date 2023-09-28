@@ -1,5 +1,5 @@
 import { Droppable } from 'react-beautiful-dnd';
-import { Text } from '..';
+import { Button, Text } from '..';
 import {
 	GridIcon,
 	LetterIcon,
@@ -13,6 +13,8 @@ import {
 import DragItem from '../DragItem';
 import { Carousel } from './Carousel';
 import { useUserContext } from '../../context/AppContext';
+import { ApplicationData, ColumnnData } from '../../initialData';
+import { useState } from 'react';
 
 interface SidebarProps {
 	useDragHandle?: boolean;
@@ -20,7 +22,46 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ onItemClick }: SidebarProps) => {
-	const { appState } = useUserContext();
+	const { appState, setItems } = useUserContext();
+	const [inputValue, setInputValue] = useState<string>('');
+	// const [filterList, setfilterList] = useState<string[]>(appState.columns['left'].taskIds);
+
+	const sortList = (type: string) => {
+		const taskList = [...appState.columns['left'].taskIds]
+
+		let sortedList: string[] = []
+		if (type === 'letters') sortedList = taskList.sort((a, b) => b.localeCompare(a))
+		else sortedList = taskList.sort((a, b) => a.localeCompare(b))
+
+
+		const newColumn: ColumnnData = {
+			...appState.columns["left"],
+			taskIds: sortedList
+		};
+
+		const newState: ApplicationData = {
+			...appState,
+			columns: {
+				...appState.columns,
+				left: newColumn,
+			},
+		};
+
+		setItems(newState);
+	}
+
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setInputValue(event.target.value);
+	};
+
+	const hanleSearch = () => {
+		// if (inputValue) {
+		// 	const taskList = [...appState.columns['left'].taskIds]
+		// 	const searchList = taskList.filter((el => el.toLowerCase().includes(inputValue.toLowerCase())));
+		// 	setfilterList(searchList)
+		// 	return;
+		// } else setfilterList(appState.columns['left'].taskIds)
+	}
 
 	return (
 		<div className="bg-white h-full overflow-y-auto">
@@ -44,20 +85,42 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 				<Carousel />
 
 				<div className="flex flex-row border border-solid border-primary  mt-2 cursor-pointer rounded-r-sm rounded-l-sm">
-					<input placeholder="input search text" type="text" className="py-1 w-full px-4" />
+					<input
+						placeholder="input search text"
+						type="text"
+						className="py-1 w-full px-4"
+						value={inputValue}
+						onChange={handleInputChange}
+					/>
 					<div className="flex justify-center items-center py-0.5 px-1 border-primary border-l outline-none">
-						<SearchIcon />
+						<Button title="search" className='p-0'
+							onClick={hanleSearch}
+						>
+							<SearchIcon />
+						</Button>
 					</div>
 				</div>
 
 				<div className="flex flex-row justify-between mt-3">
 					<div className="flex flex-row">
-						<NumberIcon />
-						<LetterIcon />
+						<Button title="ASC" className='p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center'
+							onClick={() => sortList('letters')}
+						>
+							<NumberIcon />
+						</Button>
+						<Button title="DSC" className='p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center'
+							onClick={() => sortList('number')}
+						>
+							<LetterIcon />
+						</Button>
 					</div>
 					<div className="flex flex-row">
-						<GridIcon />
-						<ListIcon />
+						<Button title="Grid" className='p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center'>
+							<GridIcon />
+						</Button>
+						<Button title="List" className='p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center'>
+							<ListIcon />
+						</Button>
 					</div>
 				</div>
 
@@ -70,7 +133,7 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 								{...provided.droppableProps}
 								className={snapshot.isDraggingOver ? 'bg-mainBg border p-1 rounded-lg' : ''}
 							>
-								{appState.columns['left']?.taskIds.map((_el, index) => {
+								{appState.columns['left'].taskIds.map((_el, index) => {
 									switch (_el) {
 										case 'new-station':
 											return (
