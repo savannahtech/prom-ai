@@ -11,7 +11,7 @@ import {
 	WorkshopIcon,
 } from '../../assets/svg';
 import DragItem from '../DragItem';
-import { Carousel } from './Carousel';
+import { Slider } from './Carousel';
 import { useUserContext } from '../../context/AppContext';
 import { ApplicationData, ColumnnData } from '../../initialData';
 import { useState } from 'react';
@@ -27,16 +27,15 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 	// const [filterList, setfilterList] = useState<string[]>(appState.columns['left'].taskIds);
 
 	const sortList = (type: string) => {
-		const taskList = [...appState.columns['left'].taskIds]
+		const taskList = [...appState.columns['left'].taskIds];
 
-		let sortedList: string[] = []
-		if (type === 'letters') sortedList = taskList.sort((a, b) => b.localeCompare(a))
-		else sortedList = taskList.sort((a, b) => a.localeCompare(b))
-
+		let sortedList: string[] = [];
+		if (type === 'letters') sortedList = taskList.sort((a, b) => b.localeCompare(a));
+		else sortedList = taskList.sort((a, b) => a.localeCompare(b));
 
 		const newColumn: ColumnnData = {
-			...appState.columns["left"],
-			taskIds: sortedList
+			...appState.columns['left'],
+			taskIds: sortedList,
 		};
 
 		const newState: ApplicationData = {
@@ -48,7 +47,7 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 		};
 
 		setItems(newState);
-	}
+	};
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(event.target.value);
@@ -61,7 +60,7 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 		// 	setfilterList(searchList)
 		// 	return;
 		// } else setfilterList(appState.columns['left'].taskIds)
-	}
+	};
 
 	return (
 		<div className="bg-white h-full overflow-y-auto">
@@ -82,7 +81,7 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 					</Text>
 				</div>
 
-				<Carousel />
+				<Slider />
 
 				<div className="flex flex-row border border-solid border-primary  mt-2 cursor-pointer rounded-r-sm rounded-l-sm">
 					<input
@@ -93,9 +92,7 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 						onChange={handleInputChange}
 					/>
 					<div className="flex justify-center items-center py-0.5 px-1 border-primary border-l outline-none">
-						<Button title="search" className='p-0'
-							onClick={hanleSearch}
-						>
+						<Button title="search" className="p-0" onClick={hanleSearch}>
 							<SearchIcon />
 						</Button>
 					</div>
@@ -103,22 +100,32 @@ export const Sidebar = ({ onItemClick }: SidebarProps) => {
 
 				<div className="flex flex-row justify-between mt-3">
 					<div className="flex flex-row">
-						<Button title="ASC" className='p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center'
+						<Button
+							title="ASC"
+							className="p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
 							onClick={() => sortList('letters')}
 						>
 							<NumberIcon />
 						</Button>
-						<Button title="DSC" className='p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center'
+						<Button
+							title="DSC"
+							className="p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
 							onClick={() => sortList('number')}
 						>
 							<LetterIcon />
 						</Button>
 					</div>
 					<div className="flex flex-row">
-						<Button title="Grid" className='p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center'>
+						<Button
+							title="Grid"
+							className="p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
+						>
 							<GridIcon />
 						</Button>
-						<Button title="List" className='p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center'>
+						<Button
+							title="List"
+							className="p-0 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
+						>
 							<ListIcon />
 						</Button>
 					</div>

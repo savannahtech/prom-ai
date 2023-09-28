@@ -20,3 +20,31 @@
 .dropped .Task {
 	width: 92% !important;
 }
+
+.react-multi-carousel-item {
+	width: auto !important;
+}
+.react-multi-carousel-list button {
+	background-color: #fff !important;
+	border-radius: 0 !important;
+}
+.react-multi-carousel-list button:hover {
+	background-color: #e5e7eb !important;
+}
+.react-multiple-carousel__arrow {
+	color: #283593 !important;
+	min-width: 16px !important;
+	font-size: 12px !important;
+}
+
+.react-multiple-carousel__arrow--left {
+	left: 0 !important;
+}
+.react-multiple-carousel__arrow--right {
+	right: 0 !important;
+}
+.react-multiple-carousel__arrow::before {
+	font-size: 12px !important;
+	font-weight: 900 !important;
+	color: #c9cde4 !important;
+}
