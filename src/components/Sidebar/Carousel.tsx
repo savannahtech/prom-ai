@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { LeftCarouselIcon, RightCarouselIcon } from '../../assets/svg';
 
-const SCROLL_AMOUNT = 50;
+const SCROLL_AMOUNT = 100;
 
 export const Carousel = () => {
 	const scrollingDivRef = useRef<HTMLDivElement | null>(null);
 	const [activeCarouselItem, setActiveCarouselItem] = useState('Stations');
 	const [index, setIndex] = useState(2);
+	const [carouselItems, setCarouselItems] = useState(['floors', 'Lines', 'Stations', 'parts', 'MoreItem1']);
 
 	// useEffect(() => {
 	// 	// Duplicate items at the beginning and end
@@ -28,22 +29,19 @@ export const Carousel = () => {
 		}
 	};
 
-	const carouselItems = ['floors', 'Lines', 'Stations', 'parts', 'MoreItem1'];
+	// const carouselItems = ['floors', 'Lines', 'Stations', 'parts', 'MoreItem1'];
+	console.log(carouselItems);
 
 	return (
 		<div className="flex w-full">
 			<button
 				className="py-1 px-0 mr-3 hover:bg-gray-200 flex-1 w-6 h-8"
 				onClick={() => {
-					if (!index) {
-						setIndex(carouselItems.length - 1);
-						setActiveCarouselItem(carouselItems[carouselItems.length - 1]);
-						slide(+200);
-					} else {
-						setActiveCarouselItem(carouselItems[index - 1]);
-						setIndex(index - 1);
-						slide(-SCROLL_AMOUNT);
+					if (index === 2) {
+						setCarouselItems([...carouselItems, ...carouselItems]);
 					}
+					setIndex(index - 1);
+					slide(-SCROLL_AMOUNT);
 				}}
 			>
 				<LeftCarouselIcon className="hover:stroke-primary hover:opacity-100" />
@@ -67,15 +65,11 @@ export const Carousel = () => {
 			<button
 				className="py-1 px-0 ml-3 hover:bg-gray-200 flex-1 w-6 h-8"
 				onClick={() => {
+					setIndex(index + 1);
 					if (carouselItems.length - 1 === index) {
-						setIndex(0);
-						setActiveCarouselItem(carouselItems[0]);
-						slide(-200);
-					} else {
-						setActiveCarouselItem(carouselItems[index + 1]);
-						setIndex(index + 1);
-						slide(+SCROLL_AMOUNT);
+						setCarouselItems([...carouselItems, ...carouselItems]);
 					}
+					slide(+SCROLL_AMOUNT);
 				}}
 			>
 				<RightCarouselIcon className="hover:stroke-primary hover:opacity-100" />
