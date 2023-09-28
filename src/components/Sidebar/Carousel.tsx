@@ -35,7 +35,7 @@ export const Slider = () => {
 				infinite={true}
 				autoPlay={false}
 				keyBoardControl={true}
-				transitionDuration={1}
+				transitionDuration={0.1}
 				containerClass="carousel-container"
 				removeArrowOnDeviceType={['tablet', 'mobile']}
 				dotListClass="custom-dot-list-style"
@@ -45,9 +45,8 @@ export const Slider = () => {
 					<div
 						onClick={() => setActiveCarouselItem(item)}
 						key={`${item}-${index}`}
-						className={`py-1 px-4 border border-primary text-sm uppercase cursor-pointer select-none ${
-							index % 2 === 1 ? 'border-r-0 border-l-0' : ''
-						} ${item === activeCarouselItem ? 'font-bold bg-primary text-white' : 'font-light '}`}
+						className={`py-1 px-4 border border-primary text-sm uppercase cursor-pointer select-none ${index % 2 === 1 ? 'border-r-0 border-l-0' : ''
+							} ${item === activeCarouselItem ? 'font-bold bg-primary text-white' : 'font-light '}`}
 					>
 						{item}
 					</div>
